@@ -68,6 +68,7 @@ type GetFlags struct {
 	statusSelector string
 	labelSelector  string
 	watch          bool
+	json           bool
 }
 
 var getArgs GetFlags
@@ -81,6 +82,7 @@ func init() {
 		"specify the status condition name and the desired state to filter the get result, e.g. ready=false")
 	getCmd.PersistentFlags().StringVarP(&getArgs.labelSelector, "label-selector", "l", "",
 		"filter objects by label selector")
+	getCmd.PersistentFlags().BoolVar(&getArgs.json, "json", false, "Print the output in Json format")
 	rootCmd.AddCommand(getCmd)
 }
 
@@ -207,8 +209,11 @@ func (get getCommand) run(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-
-	err = printers.TablePrinter(header).Print(cmd.OutOrStdout(), rows)
+	if getArgs.json == true {
+		err = printers.JsonPrinter(header).Print(cmd.OutOrStdout(), rows)
+	} else {
+		err = printers.TablePrinter(header).Print(cmd.OutOrStdout(), rows)
+	}
 	if err != nil {
 		return err
 	}

@@ -1,6 +1,6 @@
 module github.com/fluxcd/flux2/v2
 
-go 1.20
+go 1.22.1
 
 // Fix CVE-2022-28948.
 replace gopkg.in/yaml.v3 => gopkg.in/yaml.v3 v3.0.1
@@ -38,6 +38,7 @@ require (
 	github.com/google/go-containerregistry v0.19.0
 	github.com/hashicorp/go-cleanhttp v0.5.2
 	github.com/homeport/dyff v1.6.0
+	github.com/kiranmenon/jsonprinter v0.0.0-20240319134735-0818cda057f9
 	github.com/lucasb-eyer/go-colorful v1.2.0
 	github.com/manifoldco/promptui v0.9.0
 	github.com/mattn/go-shellwords v1.0.12
